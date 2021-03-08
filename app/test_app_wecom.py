@@ -1,6 +1,7 @@
 import pytest
 from appium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
+from selenium.common.exceptions import NoSuchElementException
 
 
 class TestWeCom:
@@ -13,7 +14,7 @@ class TestWeCom:
             "appPackage": "com.tencent.wework",
             "appActivity": ".launch.LaunchSplashActivity",
             "automationName": "UiAutomator2",
-            # "skipDeviceInitialization": True,
+            "skipDeviceInitialization": True,
             "skipServerInstallation": True,
             "noReset": True,
             "unicodeKeyboard": True,
@@ -28,6 +29,25 @@ class TestWeCom:
 
     def teardown_class(self):
         self.driver.quit()
+
+    def swipe_find(self, xpath, num=3):
+
+        for i in range(num):
+            if i == num - 1:
+                self.driver.implicitly_wait(5)
+                raise NoSuchElementException(f"滑动寻找{num}次，未找到元素")
+            try:
+                element = self.driver.find_element(MobileBy.XPATH, xpath)
+                return element
+            except NoSuchElementException:
+                size = self.driver.get_window_size()
+                width = size.get()
+                height = size.get()
+                start_x = width / 2
+                start_y = height * 0.8
+                end_x = start_x
+                end_y = height * 0.3
+                self.driver.swipe(start_x, start_y, end_x, end_y, 1000)
 
     @pytest.mark.parametrize("name, account, alias, gender, mobile_phone, telephone, email, address, position, "
                              "department, role", [
@@ -45,12 +65,16 @@ class TestWeCom:
         self.driver.find_element(MobileBy.XPATH, "//*[@text='手动输入添加']").click()
         edits = self.driver.find_elements(MobileBy.XPATH, "//android.widget.EditText")
         # 姓名
-        edits[0].send_keys(name)
+        self.driver.find_element(MobileBy.XPATH, "//*[contains(@text, '姓名')]/../android.widget.EditText") \
+            .send_keys(name)
         # 账号
         edits[1].send_keys(account)
         # 别名
         edits[2].send_keys(alias)
         # 手机
+        self.driver.find_element(MobileBy.XPATH, "//*[contains(@text, '手机')]/..//android.widget.EditText") \
+            .send_keys(mobile_phone)
+
         edits[3].send_keys(mobile_phone)
         # 座机
         edits[4].send_keys(telephone)
