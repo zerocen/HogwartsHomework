@@ -4,7 +4,7 @@ from app.page.base_page import BasePage
 
 class AddMemberInfoPage(BasePage):
 
-    def input_and_save_member_simplify(self, name, mobile_phone):
+    def add_member_simplify(self, name, mobile_phone):
         found_elements = self.finds(MobileBy.XPATH, "//*[@text='快速输入']")
         if (len(found_elements)) > 0:
             found_elements[0].click()
@@ -19,8 +19,8 @@ class AddMemberInfoPage(BasePage):
         self.find(MobileBy.XPATH, "//*[contains(@text, '保存')]").click()
         self.find(MobileBy.XPATH, "//*[@text='添加成功']")
 
-    def input_and_save_member_completely(self, name, account, alias, gender, mobile_phone, telephone, email, address,
-                                         position, department, role):
+    def add_member_completely(self, name, account, alias, gender, mobile_phone, telephone, email, address,
+                              position, department, role):
 
         found_elements = self.finds(MobileBy.XPATH, "//*[@text='完整输入']")
         if (len(found_elements)) > 0:
@@ -66,9 +66,11 @@ class AddMemberInfoPage(BasePage):
         self.find(MobileBy.XPATH, "//*[@text='身份']/../android.widget.RelativeLayout").click()
         self.find(MobileBy.XPATH, f"//*[@text='{role}']").click()
 
-        self.find(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector()'
-                                                               '.scrollable(true).instance(0))'
-                                                               '.scrollIntoView(new UiSelector()'
-                                                               '.text("保存").instance(0));').click()
+        self.swipe_find("保存").click()
+
+        # self.find(MobileBy.ANDROID_UIAUTOMATOR, 'new UiScrollable(new UiSelector()'
+        #                                                        '.scrollable(true).instance(0))'
+        #                                                        '.scrollIntoView(new UiSelector()'
+        #                                                        '.text("保存").instance(0));').click()
 
         self.find(MobileBy.XPATH, "//*[@text='添加成功']")

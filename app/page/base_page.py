@@ -17,7 +17,7 @@ class BasePage:
     def find_and_click(self, selector, value):
         self.find(selector, value).click()
 
-    def swipe_find(self, xpath, num=3):
+    def swipe_find(self, text, num=3):
         for i in range(num):
             if i == num - 1:
                 self.driver.implicitly_wait(5)
@@ -26,7 +26,7 @@ class BasePage:
             self.driver.implicitly_wait(1)
 
             try:
-                element = self.driver.find_element(MobileBy.XPATH, xpath)
+                element = self.driver.find_element(MobileBy.XPATH, f"//*[@text={text}]")
                 self.driver.implicitly_wait(5)
                 return element
             except NoSuchElementException:
