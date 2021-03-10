@@ -11,6 +11,7 @@ class TestContacts:
     def teardown(self):
         self.app.stop()
 
+    @pytest.mark.skip()
     @pytest.mark.parametrize("name, account, alias, gender, mobile_phone, telephone, email, address, position,"
                              "department, role",
                              [("张三", "ZhangSan", "zs", "男", "12345678900", "021456789", "zhangsan@test.com",
@@ -34,8 +35,9 @@ class TestContacts:
         add_member_info_page = self.contacts_page.goto_add_member_page().goto_add_member_info_page()
         add_member_info_page.add_member_simplify(name, mobile_phone)
 
-    @pytest.mark.parametrize("name", [("张三2",), ("Keely2",), ("Erwin2",)])
+    @pytest.mark.parametrize("name", ["张三2", "Keely2", "Erwin2"])
     def test_delete_member(self, name):
-        self.contacts_page.goto_member_info_page_by_search(name)
-            # .goto_member_info_settings_page()\
-            # .goto_edit_member_info_page().delete_member()
+        search_page = self.contacts_page.goto_search_member_page()
+        search_page.search_and_goto_member_info_page(name).goto_member_info_settings_page().\
+            goto_edit_member_info_page().delete_member()
+        assert search_page.verify_member_not_exist(name)

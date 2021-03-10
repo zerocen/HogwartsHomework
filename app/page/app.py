@@ -1,24 +1,20 @@
+import yaml
 from appium import webdriver
 from app.page.base_page import BasePage
 from app.page.main_page import MainPage
+
+
+with open("../data/config.yml") as f:
+    data = yaml.safe_load(f)
+    caps = data["caps"]
+    command_executor = data["server"]["commandExecutor"]
 
 
 class App(BasePage):
 
     def start(self):
         if self.driver is None:
-            caps = {
-                "platformName": "android",
-                "deviceName": "98221FFAZ000EJ",
-                "appPackage": "com.tencent.wework",
-                "appActivity": ".launch.LaunchSplashActivity",
-                "skipDeviceInitialization": True,
-                "skipServerInstallation": True,
-                "noReset": True,
-                "unicodeKeyboard": True,
-                "resetKeyboard": True
-            }
-            self.driver = webdriver.Remote("http://localhost:4723/wd/hub", caps)
+            self.driver = webdriver.Remote(command_executor, caps)
             self.driver.implicitly_wait(5)
         else:
             self.driver.launch_app()

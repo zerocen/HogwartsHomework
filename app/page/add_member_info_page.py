@@ -5,9 +5,11 @@ from app.page.base_page import BasePage
 class AddMemberInfoPage(BasePage):
 
     def add_member_simplify(self, name, mobile_phone):
+        self.driver.implicitly_wait(1)
         found_elements = self.finds(MobileBy.XPATH, "//*[@text='快速输入']")
         if (len(found_elements)) > 0:
             found_elements[0].click()
+        self.driver.implicitly_wait(5)
 
         # 姓名
         self.find(MobileBy.XPATH, "//*[contains(@text, '姓名')]/..//*[@text='必填']") \
@@ -22,9 +24,11 @@ class AddMemberInfoPage(BasePage):
     def add_member_completely(self, name, account, alias, gender, mobile_phone, telephone, email, address,
                               position, department, role):
 
+        self.driver.implicitly_wait(1)
         found_elements = self.finds(MobileBy.XPATH, "//*[@text='完整输入']")
         if (len(found_elements)) > 0:
             found_elements[0].click()
+        self.driver.implicitly_wait(5)
 
         # 姓名
         self.find(MobileBy.XPATH, "//*[contains(@text, '姓名')]/../android.widget.EditText") \
