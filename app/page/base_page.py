@@ -8,14 +8,14 @@ class BasePage:
     def __init__(self, driver: WebDriver = None):
         self.driver = driver
 
-    def find(self, selector, value):
-        return self.driver.find_element(selector, value)
+    def find(self, locator, value):
+        return self.driver.find_element(locator, value)
 
-    def finds(self, selector, value):
-        return self.driver.find_elements(selector, value)
+    def finds(self, locator, value):
+        return self.driver.find_elements(locator, value)
 
-    def find_and_click(self, selector, value):
-        self.find(selector, value).click()
+    def find_and_click(self, locator, value):
+        self.find(locator, value).click()
 
     def swipe_find(self, text, num=3):
         for i in range(num):

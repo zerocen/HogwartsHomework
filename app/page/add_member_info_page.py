@@ -10,10 +10,10 @@ class AddMemberInfoPage(BasePage):
             found_elements[0].click()
 
         # 姓名
-        self.find(MobileBy.XPATH, "//*[contains(@text, '姓名')]/../android.widget.EditText") \
+        self.find(MobileBy.XPATH, "//*[contains(@text, '姓名')]/..//*[@text='必填']") \
             .send_keys(name)
         # 手机
-        self.find(MobileBy.XPATH, "//*[contains(@text, '手机')]/..//android.widget.EditText") \
+        self.find(MobileBy.XPATH, "//*[contains(@text, '手机')]/..//*[@text='必填']") \
             .send_keys(mobile_phone)
 
         self.find(MobileBy.XPATH, "//*[contains(@text, '保存')]").click()
