@@ -1,0 +1,13 @@
+caps:
+  platformName: "android"
+  deviceName: "98221FFAZ000EJ"
+  appPackage: "com.xueqiu.android"
+  appActivity: ".view.WelcomeActivityAlias"
+  skipDeviceInitialization: "true"
+  skipServerInstallation: "true"
+  noReset: "true"
+  unicodeKeyboard: "true"
+  resetKeyboard: "true"
+
+server:
+  commandExecutor: "http://localhost:4723/wd/hub"
