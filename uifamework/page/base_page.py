@@ -1,40 +1,16 @@
 import logging
+
+import yaml
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from selenium.common.exceptions import NoSuchElementException
+from uifamework.page.blacklist_handler import handle_blacklist
 
 
 class BasePage:
 
-    logging.basicConfig(level=logging.INFO, filename="../logs/test_log.log",
-                        format="[%(asctime)s-%(filename)s-%(levelname)s:%(message)s]", filemode="a",
-                        datefmt="'%Y-%m-%d %I:%M:%S %p'")
-
     def __init__(self, driver: WebDriver = None):
         self.driver = driver
-
-    def handle_blacklist(func):
-        blacklist = ["//*[@resource-id='com.xueqiu.android:id/iv_close']",
-                     "//*[@resource-id='com.xueqiu.android:id/tv_agree']",
-                     "//*[@resource-id='com.xueqiu.android:id/tv_skip']"]
-
-        def wrapper(self, *args, **kwargs):
-            try:
-                obj = func(self, *args, **kwargs)
-                if isinstance(obj, list) and len(obj) == 0:
-                    raise NoSuchElementException("Failed to find elements.")
-                return obj
-            except (StaleElementReferenceException, NoSuchElementException):
-                for xpath in blacklist:
-                    elements = self.driver.find_elements(MobileBy.XPATH, xpath)
-                    if len(elements) > 0:
-                        elements[0].click()
-                        return func(self, *args, **kwargs)
-                # else:
-                    # Some elements in the black list may disappear automatically, such as ad. Find the target again.
-                    # return wrapper(self, *args, **kwargs)
-
-        return wrapper
 
     @handle_blacklist
     def find(self, locator, value):
@@ -75,3 +51,9 @@ class BasePage:
                 end_x = start_x
                 end_y = height * 0.3
                 self.driver.swipe(start_x, start_y, end_x, end_y, 1000)
+
+    def perform_function(self, file_path, function_name):
+        with open(file_path, "r", encoding="utf-8") as f:
+            function = yaml.safe_load(f)
+
+        function[function_name]
