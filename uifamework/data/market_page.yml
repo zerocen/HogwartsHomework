@@ -1,8 +1,4 @@
-go_to_market:
+goto_search:
   - action: find_and_click
-    locator: xpath
-    value: //*[@resource-id='com.xueqiu.android:id/post_status']
-
-  - action: find_and_click
-    locator: xpath
-    value: //*[@text='行情']
+  - locator: xpath
+  - value: //*[@resource-id='com.xueqiu.android:id/action_search']

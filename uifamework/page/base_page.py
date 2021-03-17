@@ -1,5 +1,4 @@
 import logging
-
 import yaml
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
@@ -56,4 +55,9 @@ class BasePage:
         with open(file_path, "r", encoding="utf-8") as f:
             function = yaml.safe_load(f)
 
-        function[function_name]
+        steps = function[function_name]
+        for step in steps:
+            if step["action"] == "find_and_click":
+                self.find_and_click(step["locator"], step["value"])
+            elif step["action"] == "find_and_send_keys":
+                self.find_and_send_keys(step["locator"], step["value"], step["content"])
