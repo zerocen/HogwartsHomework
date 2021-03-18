@@ -54,7 +54,7 @@ class BasePage:
 
     def capture_screenshot(self):
         logger.info("Capturing screenshot...")
-        return self.driver.get_screenshot_as_file()
+        return self.driver.get_screenshot_as_png()
 
     def perform_function(self, file_path, function_name):
         with open(file_path, "r", encoding="utf-8") as f:

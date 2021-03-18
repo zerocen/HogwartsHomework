@@ -1,6 +1,6 @@
 import logging
 import logging.handlers
-
+import os
 
 logger = logging.getLogger("MY_LOG")
 
@@ -9,6 +9,9 @@ def init_logger():
     logger.setLevel(logging.INFO)
 
     log_formatter = logging.Formatter("[%(asctime)s]  %(levelname)s %(filename)s:%(lineno)d:%(funcName)s  %(message)s")
+
+    if not os.path.exists("../logs"):
+        os.makedirs("../logs")
 
     file_handler = logging.handlers.RotatingFileHandler("../logs/test_log.log", mode="a", backupCount=10,
                                                         encoding="utf-8")
