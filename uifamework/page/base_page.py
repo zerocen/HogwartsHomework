@@ -1,9 +1,9 @@
-import logging
 import yaml
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
 from selenium.common.exceptions import NoSuchElementException
 from uifamework.page.blacklist_handler import handle_blacklist
+from uifamework.utils.logger import logger
 
 
 class BasePage:
@@ -13,17 +13,16 @@ class BasePage:
 
     @handle_blacklist
     def find(self, locator, value):
-        logging.info(f"find element: {(locator, value)}")
+        logger.info(f"Find element: {(locator, value)}")
         return self.driver.find_element(locator, value)
 
     @handle_blacklist
     def finds(self, locator, value):
-        logging.info(f"find elements: {(locator, value)}")
+        logger.info(f"Find element: {(locator, value)}")
         return self.driver.find_elements(locator, value)
 
     def find_and_click(self, locator, value):
         element = self.find(locator, value)
-        logging.info(f"click element: {(locator, value)}")
         element.click()
 
     def find_and_send_keys(self, locator, value, key_value):
@@ -49,7 +48,13 @@ class BasePage:
                 start_y = height * 0.8
                 end_x = start_x
                 end_y = height * 0.3
+
+                logger.info(f"Swipe from ({start_x}, {start_y}) to ({end_x}, {end_y})")
                 self.driver.swipe(start_x, start_y, end_x, end_y, 1000)
+
+    def capture_screenshot(self):
+        logger.info("Capturing screenshot...")
+        return self.driver.get_screenshot_as_file()
 
     def perform_function(self, file_path, function_name):
         with open(file_path, "r", encoding="utf-8") as f:
@@ -57,6 +62,8 @@ class BasePage:
 
         steps = function[function_name]
         for step in steps:
+            logger.info(f"Perform function: {step['action']}, {step['locator']},{step['value']}")
+
             if step["action"] == "find_and_click":
                 self.find_and_click(step["locator"], step["value"])
             elif step["action"] == "find_and_send_keys":

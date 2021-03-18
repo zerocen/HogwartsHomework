@@ -1,5 +1,7 @@
+import allure
 from appium.webdriver.common.mobileby import MobileBy
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
+from uifamework.utils.logger import logger
 
 
 def handle_blacklist(func):
@@ -15,10 +17,15 @@ def handle_blacklist(func):
                 raise NoSuchElementException("Failed to find elements.")
             return obj
         except (StaleElementReferenceException, NoSuchElementException):
+
+            allure.attach(instance.capture_screenshot(), attachment_type=allure.attachment_type.PNG)
+
             for xpath in blacklist:
                 elements = instance.driver.find_elements(MobileBy.XPATH, xpath)
                 if len(elements) > 0:
+                    logger.info(f"Find a Pop-up window: {xpath}")
                     elements[0].click()
+
                     return func(*args, **kwargs)
 
     return wrapper
