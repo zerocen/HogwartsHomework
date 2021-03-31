@@ -1,9 +1,9 @@
 import requests
 
 
-class TestWecomApi:
+class Contacts:
 
-    def setup(self):
+    def __init__(self):
         self.base_url = "https://qyapi.weixin.qq.com"
         self.proxies = {
             "http": "http://127.0.0.1:8888",
@@ -15,23 +15,22 @@ class TestWecomApi:
         path = "/cgi-bin/gettoken"
         params = {
             "corpid": "ww2252fababfb37b4b",
-            "corpsecret": "-_10nepjwy4uW2wTgxc8WEHJuQ55bz0VM8yS8z97Pyo"
+            "corpsecret": "-_10nepjwy4uW2wTgxc8WJjNXcgBYnSTQ4O_6dRhbJA"
         }
         r = requests.get(f"{self.base_url}{path}", params=params)
         print(r.text)
         return r.json()["access_token"]
 
-    def test_get_member_info(self):
+    def get_member_info(self):
         path = "/cgi-bin/user/get"
         params = {
             "access_token": self.access_token,
             "userid": "zhangsan"
         }
         r = requests.get(f"{self.base_url}{path}", params=params)
-        print(r.text)
-        assert r.json()["errcode"] == 0
+        return r.json()
 
-    def test_create_member(self):
+    def create_member(self):
         path = "/cgi-bin/user/create"
         params = {
             "access_token": self.access_token
@@ -43,10 +42,9 @@ class TestWecomApi:
             "department": [1]
         }
         r = requests.post(f"{self.base_url}{path}", params=params, json=data)
-        print(r.text)
-        assert r.json()["errcode"] == 0
+        return r.json()
 
-    def test_update_member(self):
+    def update_member(self):
         path = "/cgi-bin/user/update"
         params = {
             "access_token": self.access_token
@@ -56,15 +54,13 @@ class TestWecomApi:
             "name": "Mid-001"
         }
         r = requests.post(f"{self.base_url}{path}", params=params, json=data)
-        print(r.text)
-        assert r.json()["errcode"] == 0
+        return r.json()
 
-    def test_delete_member(self):
+    def delete_member(self):
         path = "/cgi-bin/user/delete"
         params = {
             "access_token": self.access_token,
             "userid": "mid"
         }
         r = requests.get(f"{self.base_url}{path}", params=params)
-        print(r.text)
-        assert r.json()["errcode"] == 0
+        return r.json()
