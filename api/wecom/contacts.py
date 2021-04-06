@@ -1,66 +1,45 @@
-import requests
+from api.utils.logger import logger
+from api.wecom.base import Base
 
 
-class Contacts:
+class Contacts(Base):
 
-    def __init__(self):
-        self.base_url = "https://qyapi.weixin.qq.com"
-        self.proxies = {
-            "http": "http://127.0.0.1:8888",
-            "https": "http://127.0.0.1:8888"
-        }
-        self.access_token = self.get_access_token()
-
-    def get_access_token(self):
-        path = "/cgi-bin/gettoken"
-        params = {
-            "corpid": "ww2252fababfb37b4b",
-            "corpsecret": "-_10nepjwy4uW2wTgxc8WJjNXcgBYnSTQ4O_6dRhbJA"
-        }
-        r = requests.get(f"{self.base_url}{path}", params=params)
-        print(r.text)
-        return r.json()["access_token"]
-
-    def get_member_info(self):
+    def get_member_info(self, userid):
+        logger.info("Getting member information...")
         path = "/cgi-bin/user/get"
         params = {
-            "access_token": self.access_token,
-            "userid": "zhangsan"
+            "userid": userid
         }
-        r = requests.get(f"{self.base_url}{path}", params=params)
+        r = self.send_request("GET", f"{self.base_url}{path}", params=params)
         return r.json()
 
-    def create_member(self):
+    def create_member(self, userid, name, mobile, department):
+        logger.info("Creating member response...")
         path = "/cgi-bin/user/create"
-        params = {
-            "access_token": self.access_token
-        }
         data = {
-            "userid": "mid",
-            "name": "Mid",
-            "mobile": "13300000000",
-            "department": [1]
+            "userid": userid,
+            "name": name,
+            "mobile": mobile,
+            "department": department
         }
-        r = requests.post(f"{self.base_url}{path}", params=params, json=data)
+        r = self.send_request("POST", f"{self.base_url}{path}", json=data)
         return r.json()
 
-    def update_member(self):
+    def update_member_name(self, userid, name):
+        logger.info("Updating member name response...")
         path = "/cgi-bin/user/update"
-        params = {
-            "access_token": self.access_token
-        }
         data = {
-            "userid": "mid",
-            "name": "Mid-001"
+            "userid": userid,
+            "name": name
         }
-        r = requests.post(f"{self.base_url}{path}", params=params, json=data)
+        r = self.send_request("POST", f"{self.base_url}{path}", json=data)
         return r.json()
 
-    def delete_member(self):
+    def delete_member(self, userid):
+        logger.info("Deleting member response...")
         path = "/cgi-bin/user/delete"
         params = {
-            "access_token": self.access_token,
-            "userid": "mid"
+            "userid": userid
         }
-        r = requests.get(f"{self.base_url}{path}", params=params)
+        r = self.send_request("GET", f"{self.base_url}{path}", params=params)
         return r.json()

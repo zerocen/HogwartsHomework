@@ -15,7 +15,7 @@ class TestWecomApi:
         path = "/cgi-bin/gettoken"
         params = {
             "corpid": "ww2252fababfb37b4b",
-            "corpsecret": "-_10nepjwy4uW2wTgxc8WEHJuQ55bz0VM8yS8z97Pyo"
+            "corpsecret": "-_10nepjwy4uW2wTgxc8WJjNXcgBYnSTQ4O_6dRhbJA"
         }
         r = requests.get(f"{self.base_url}{path}", params=params)
         print(r.text)
