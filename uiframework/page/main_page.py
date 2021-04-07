@@ -1,6 +1,6 @@
 from appium.webdriver.common.mobileby import MobileBy
-from uifamework.page.base_page import BasePage
-from uifamework.page.market_page import MarketPage
+from uiframework.page.base_page import BasePage
+from uiframework.page.market_page import MarketPage
 
 
 class MainPage(BasePage):

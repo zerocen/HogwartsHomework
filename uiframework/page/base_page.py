@@ -2,8 +2,8 @@ import yaml
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.webdriver import WebDriver
 from selenium.common.exceptions import NoSuchElementException
-from uifamework.page.blacklist_handler import handle_blacklist
-from uifamework.utils.logger import logger
+from uiframework.page.blacklist_handler import handle_blacklist
+from uiframework.utils.logger import logger
 
 
 class BasePage:

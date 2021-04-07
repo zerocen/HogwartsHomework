@@ -1,4 +1,4 @@
-from uifamework.page.app import App
+from uiframework.page.app import App
 
 
 class TestContacts:

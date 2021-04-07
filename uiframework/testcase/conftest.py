@@ -5,7 +5,7 @@ import time
 import allure
 import pytest
 
-from uifamework.utils.logger import init_logger, logger
+from uiframework.utils.logger import init_logger, logger
 
 
 @pytest.fixture(scope="module", autouse=True)

@@ -1,5 +1,5 @@
-from uifamework.page.base_page import BasePage
-from uifamework.page.search_page import SearchPage
+from uiframework.page.base_page import BasePage
+from uiframework.page.search_page import SearchPage
 
 
 class MarketPage(BasePage):

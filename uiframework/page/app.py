@@ -1,7 +1,7 @@
 import yaml
 from appium import webdriver
-from uifamework.page.base_page import BasePage
-from uifamework.page.main_page import MainPage
+from uiframework.page.base_page import BasePage
+from uiframework.page.main_page import MainPage
 
 
 with open("../data/config.yml") as f:

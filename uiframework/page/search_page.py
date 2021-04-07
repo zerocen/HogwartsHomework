@@ -1,4 +1,4 @@
-from uifamework.page.base_page import BasePage
+from uiframework.page.base_page import BasePage
 
 
 class SearchPage(BasePage):

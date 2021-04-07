@@ -1,7 +1,7 @@
 import allure
 from appium.webdriver.common.mobileby import MobileBy
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
-from uifamework.utils.logger import logger
+from uiframework.utils.logger import logger
 
 
 def handle_blacklist(func):
