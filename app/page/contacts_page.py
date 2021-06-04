@@ -15,4 +15,3 @@ class ContactsPage(BasePage):
         self.find_and_click(MobileBy.XPATH, "(//*[@text='Zerolab']/ancestor::android.widget.RelativeLayout[1]"
                                             "//android.widget.TextView)[2]")
         return SearchMemberPage(self.driver)
-

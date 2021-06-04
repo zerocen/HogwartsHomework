@@ -28,4 +28,3 @@ class ContactsPage:
 
         # Save
         self.driver.find_element(By.XPATH, "//*[@class='qui_btn ww_btn js_btn_save']").click()
-

@@ -15,4 +15,3 @@ class TestContacts:
 
     def test_market_2(self):
         self.main_page.goto_market_page_2().goto_search_page().search()
-
