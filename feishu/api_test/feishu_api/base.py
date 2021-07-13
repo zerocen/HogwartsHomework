@@ -11,9 +11,11 @@ class Base:
             "https": "http://127.0.0.1:8888"
         }
         self.session = requests.Session()
+
         self.access_token = self.get_access_token()
         self.session.headers = {
-            "Authorization": f"Bearer {self.access_token}"
+            "Authorization": f"Bearer {self.access_token}",
+            "Content-Type": "application/json; charset=utf-8"
         }
 
     def get_access_token(self):
