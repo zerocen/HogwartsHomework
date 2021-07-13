@@ -1,5 +1,5 @@
-from feishu.api_test.feishu_api.base import Base
-from feishu.api_test.utils.logger import logger
+from feishu.api.feishu_api.base import Base
+from feishu.api.utils.logger import logger
 
 
 class ChatGroupMember(Base):

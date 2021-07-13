@@ -1,0 +1,2 @@
+class MessagePage:
+    pass

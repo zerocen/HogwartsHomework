@@ -1,5 +1,5 @@
 import requests
-from feishu.api_test.utils.logger import logger
+from feishu.api.utils.logger import logger
 
 
 class Base:

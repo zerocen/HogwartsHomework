@@ -1,0 +1,14 @@
+app_url: "https://www.feishu.cn"
+data_dir:
+  test_case: "data/test_case"
+  test_data: "data/test_data"
+  page_function: "data/page_function"
+  log_dir: "logs"
+driver_config:
+  browser: "Chrome"
+  proxy: ""
+  using_headless: false
+  default_implicit_waiting_time: 20
+account:
+  username: "admin"
+  password: "AdminPassword123!"
