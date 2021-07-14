@@ -38,6 +38,9 @@ pip-delete-this-directory.txt
 # log dir
 logs/
 
+# Allure
+allure*/
+
 # Unit test / coverage reports
 htmlcov/
 report/

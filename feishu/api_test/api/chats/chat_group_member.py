@@ -1,8 +1,8 @@
-from feishu.api.feishu_api.base import Base
-from feishu.api.utils.logger import logger
+from feishu.api_test.api.base_api import BaseApi
+from feishu.utils.logger import logger
 
 
-class ChatGroupMember(Base):
+class ChatGroupMember(BaseApi):
 
     def get_members(self, chat_id):
         logger.info("Getting chat group member information...")

@@ -1,8 +1,8 @@
 import requests
-from feishu.api.utils.logger import logger
+from feishu.utils.logger import logger
 
 
-class Base:
+class BaseApi:
 
     def __init__(self):
         self.base_url = "https://open.feishu.cn/open-apis"

@@ -1,13 +1,7 @@
 import pytest
-from feishu.api.feishu_api.chats.chat_group import ChatGroup
-from feishu.api.feishu_api.chats.chat_group_member import ChatGroupMember
-from feishu.api.feishu_api.chats.chat_group_message import ChatGroupMessage
-from feishu.api.utils.logger import init_logger
-
-
-@pytest.fixture(scope="session", autouse=True)
-def configure_logger():
-    init_logger()
+from feishu.api_test.api.chats.chat_group import ChatGroup
+from feishu.api_test.api.chats.chat_group_member import ChatGroupMember
+from feishu.api_test.api.chats.chat_group_message import ChatGroupMessage
 
 
 @pytest.fixture(scope="module")
