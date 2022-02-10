@@ -3,6 +3,9 @@ from feishu.utils.logger import logger
 
 
 class BaseApi:
+    """
+    封装requests等库的细节，实现与具体的请求工具无关，以及做一些简化和功能增强
+    """
 
     def __init__(self):
         self.base_url = "https://open.feishu.cn/open-apis"
@@ -32,3 +35,6 @@ class BaseApi:
         response = self.session.request(*args, **kwargs)
         logger.debug(f"Response: {response.text}")
         return response
+
+    def get_json(self):
+        pass
